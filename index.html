@@ -1,17 +1,28 @@
 <html>
 
 <head>
+
     <style>
         #root {
             width: 100vw;
             height: 100vh;
             }
+            .form{
+                position:absolute;
+                top: 50%; left: 50%;
+                transform: translate(-50%, -50%);
+}
     </style>
 </head>
 
 
 <body>
+    <form action="WEB_UIKITS.html" method="get">
+        <input type="hidden" name="param1" value="value1">
+        <button type="explore">Explore</button>
+      </form>
     <div id="root"></div>
+   
 </body>
 <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
 <script>

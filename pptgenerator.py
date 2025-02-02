@@ -88,7 +88,7 @@ def create_ppt_from_content(content):
 
 @app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html")  # Serve the HTML page
+    return render_template("3.html")  # Serve the HTML page
 
 @app.route("/generate_ppt", methods=["POST"])
 def generate_ppt():

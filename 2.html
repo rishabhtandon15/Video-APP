@@ -1,0 +1,85 @@
+<html>
+
+<head>
+
+    <style>
+        #root {
+            width: 100vw;
+            height: 100vh;
+            }
+            .form{
+                position:absolute;
+                top: 50%; left: 50%;
+                transform: translate(-50%, -50%);
+                
+
+            }
+
+    </style>
+        <script type="module" src="firebase.js"></script>
+        
+</head>
+
+
+<body>
+    <form action="WEB_UIKITS.html" method="get">
+        <input type="hidden" name="param1" value="value1">
+        <button type="back" style="height: 50px; width: 200px; font-size: large; box-shadow: none; border: none; color: #000000; text-shadow: none;background: linear-gradient(145deg, #f0c27b, #4b1248);box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.1);background-image: radial-gradient(circle, #f0c27b, #f0c27b 50%, transparent 10%), radial-gradient(circle, #f0c27b, #f0c27b 10%, transparent 10%);background-size: 5px 5px; background-position: 0 0, 2.5px 2.5px;" ><-Want to go back?</button>
+      </form>
+      <div id="signUpMessage" class="messageDiv" style="display:none"></div>
+    <div id="root"></div>
+   
+</body>
+<script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+<script>
+window.onload = function () {
+    function getUrlParams(url) {
+        let urlStr = url.split('?')[1];
+        const urlSearchParams = new URLSearchParams(urlStr);
+        const result = Object.fromEntries(urlSearchParams.entries());
+        return result;
+    }
+
+
+        // Generate a Token by calling a method.
+        // @param 1: appID
+        // @param 2: serverSecret
+        // @param 3: Room ID
+        // @param 4: User ID
+        // @param 5: Username
+    const roomID = getUrlParams(window.location.href)['roomID'] || (Math.floor(Math.random() * 10000) + "");
+    const userID = Math.floor(Math.random() * 10000) + "";
+    const userName = "userName" + userID;
+    const appID = 161418632;
+    const serverSecret = "77d4af4299bcc862e0314d73ad68101e";
+    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
+
+    
+        const zp = ZegoUIKitPrebuilt.create(kitToken);
+        zp.joinRoom({
+            container: document.querySelector("#root"),
+            sharedLinks: [{
+                name: 'Personal link',
+                url: window.location.protocol + '//' + window.location.host  + window.location.pathname + '?roomID=' + roomID,
+            }],
+            scenario: {
+                mode: ZegoUIKitPrebuilt.VideoConference,
+            },
+                
+           	turnOnMicrophoneWhenJoining: true,
+           	turnOnCameraWhenJoining: false,
+           	showMyCameraToggleButton: true,
+           	showMyMicrophoneToggleButton: true,
+           	showAudioVideoSettingsButton: true,
+           	showScreenSharingButton: true,
+           	showTextChat: true,
+           	showUserList: true,
+           	maxUsers: 50,
+           	layout: "Grid",
+           	showLayoutButton: true,
+         
+            });
+}
+</script>
+
+</html>

@@ -1,105 +1,267 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fusion AI - Meeting Dashboard</title>
     <style>
-        #root {
-            width: 80vw; /* Adjusted width to make space for sidebar */
-            height: 100vh;
-            float: right;
-        }
-
-        #sidebar {
-            width: 15vw;
-            height: 100vh;
-            background-color: #2222f9;
-            color: white;
-            position: fixed;
-            left: 0;
-            top: 0;
-            padding: 15px;
-            border-radius: 5px
-        }
-
-        #sidebar ul {
-            list-style-type: none;
+        * {
+            margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
-        #sidebar li {
-            margin: 20px 0;
+        body {
+            background: #f5f5ff;
+            color: #333;
         }
 
-        #sidebar li a {
-            color: white;
+        .container {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background: white;
+            padding: 20px;
+            border-right: 1px solid #eee;
+        }
+
+        .logo {
+            color: #6b46c1;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            color: #666;
             text-decoration: none;
-            font-size: 18px;
+            border-radius: 8px;
         }
 
-        #sidebar li a:hover {
-            text-decoration: underline;
+        .nav-item:hover {
+            background: #f5f5ff;
+        }
+
+        .nav-item svg {
+            margin-right: 12px;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            padding: 32px;
+        }
+
+        .welcome-text {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 32px;
+        }
+
+        .action-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .action-card {
+            height: 200px;
+            background: linear-gradient(0deg, #250c6c 0%, #4717a8 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .action-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .action-card h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .action-card p {
+            opacity: 0.8;
+            font-size: 16px;
+        }
+
+        .action-card .add-button,
+        .action-card .icon-button {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .upcoming-meetings h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 24px;
+        }
+
+        .meeting-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .meeting-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .meeting-title {
+            font-size: 20px;
+            color: #444;
+        }
+
+        .team-badge {
+            background: #6b46c1;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 14px;
+        }
+
+        .meeting-info {
+            display: flex;
+            align-items: center;
+            color: #666;
+        }
+
+        .meeting-info span {
+            margin-right: 24px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar {
+            background: white;
+            border-radius: 8px;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 32px;
+            border: 1px solid #eee;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            width: 100%;
+            margin-left: 12px;
+            font-size: 16px;
         }
     </style>
 </head>
-
 <body>
     <div class="container">
-    <div id="sidebar">
-        <ul>
-            <li><a href="#">Element 1</a></li>
-            <li><a href="#">Element 2</a></li>
-            <li><a href="#">Element 3</a></li>
-            <li><a href="#">Element 4</a></li>
-            <li><a href="#">Element 5</a></li>
-        </ul>
+        <div class="sidebar">
+            <div class="logo">Fusion AI</div>
+            <nav>
+                <a href="#" class="nav-item">🏠 Home</a>
+                <a href="#" class="nav-item">📅 Meetings</a>
+                <a href="#" class="nav-item">📊 Meeting Status</a>
+                <a href="#" class="nav-item">📋 AI PPT</a>
+                <a href="#" class="nav-item">🔗 Integration</a>
+                <a href="#" class="nav-item">📈 Analytics</a>
+                <a href="#" class="nav-item">👥 Team</a>
+                <a href="#" class="nav-item">⚙️ Settings</a>
+                <a href="#" class="nav-item">❓ Help & Support</a>
+            </nav>
+        </div>
+        
+        <div class="main-content">
+            <div class="search-bar">
+                <span>🔍</span>
+                <input type="text" placeholder="Search or ask anything across your meetings.." />
+                <span style="color: #666;">  </span>
+            </div>
+
+            <h1 class="welcome-text">Hello Amy!</h1>
+
+            <div class="action-cards">
+                <div class="action-card">
+                    <button class="add-button">+</button>
+                    <div>
+                        <h3>New Meeting</h3>
+                        <p>Start an instant meeting</p>
+                    </div>
+                </div>
+                <div class="action-card">
+                    <button class="icon-button">👥</button>
+                    <div>
+                        <h3>Join Meeting</h3>
+                        <p>via invitation link</p>
+                    </div>
+                </div>
+                <div class="action-card">
+                    <button class="icon-button">📅</button>
+                    <div>
+                        <h3>Schedule Meeting</h3>
+                        <p>Plan your meeting</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="upcoming-meetings">
+                <h2>Upcoming Meetings</h2>
+                
+                <div class="meeting-card">
+                    <div class="meeting-header">
+                        <h3 class="meeting-title">Policy Update Session</h3>
+                        <span class="team-badge">AV Team</span>
+                    </div>
+                    <div class="meeting-info">
+                        <span>📅 Friday, 28 February 2025</span>
+                        <span>🕐 11:00 - 12:30AM</span>
+                    </div>
+                </div>
+
+                <div class="meeting-card">
+                    <div class="meeting-header">
+                        <h3 class="meeting-title">Meeting with Gonzales</h3>
+                        <span class="team-badge">Design</span>
+                    </div>
+                    <div class="meeting-info">
+                        <span>📅 Friday, 28 February 2025</span>
+                        <span>🕐 17:30 - 18:00PM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div id="root"></div>
-
-    <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
-    <script>
-        window.onload = function () {
-            function getUrlParams(url) {
-                let urlStr = url.split('?')[1];
-                const urlSearchParams = new URLSearchParams(urlStr);
-                const result = Object.fromEntries(urlSearchParams.entries());
-                return result;
-            }
-
-            // Generate a Token by calling a method.
-            const roomID = getUrlParams(window.location.href)['roomID'] || (Math.floor(Math.random() * 10000) + "");
-            const userID = Math.floor(Math.random() * 10000) + "";
-            const userName = "userName" + userID;
-            const appID = 161418632;
-            const serverSecret = "77d4af4299bcc862e0314d73ad68101e";
-            const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
-
-            const zp = ZegoUIKitPrebuilt.create(kitToken);
-            zp.joinRoom({
-                container: document.querySelector("#root"),
-                sharedLinks: [{
-                    name: 'Personal link',
-                    url: window.location.protocol + '//' + window.location.host  + window.location.pathname + '?roomID=' + roomID,
-                }],
-                scenario: {
-                    mode: ZegoUIKitPrebuilt.VideoConference,
-                },
-                turnOnMicrophoneWhenJoining: true,
-                turnOnCameraWhenJoining: true,
-                showMyCameraToggleButton: true,
-                showMyMicrophoneToggleButton: true,
-                showAudioVideoSettingsButton: true,
-                showScreenSharingButton: true,
-                showTextChat: true,
-                showUserList: true,
-                maxUsers: 50,
-                layout: "Grid",
-                showLayoutButton: true,
-            });
-        }
-    </script>
-
 </body>
-
 </html>
-
-
